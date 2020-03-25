@@ -1,0 +1,4 @@
+Commands used for creation and running Dockerfile
+
+docker build -t przemekgorzynski/kimmi_image:v1
+docker run -dt -p 80:80 --name kimmi przemekgorzynski/kimmi_image:v1 
