@@ -65,3 +65,10 @@
 
     - name: Check connectivity
       ping:
+
+    - name: Check docker is running
+      shell: systemctl status docker | head -n 3 | tail -n 1 | awk '{ print $2 $3 }'
+      register: docker_status
+
+    - debug:
+       msg:  "{{ docker_status.stdout }}"
