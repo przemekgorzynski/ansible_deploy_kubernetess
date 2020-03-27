@@ -5,25 +5,25 @@
 
   tasks:
     - name: Add Docker apt-key to repository
-        apt_key:
+      apt_key:
           url: https://download.docker.com/linux/ubuntu/gpg
           state: present
 
     - name: Add Kubernetes apt-key to repository on Ubuntu
-        apt_key:
-          url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-          state: present
+      apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
 
     - name: Add Docker repository
-        apt_repository:
-          repo: deb https://download.docker.com/linux/ubuntu bionic stable
-          state: present
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
 
     - name: Add Kubernetes repository
-        apt_repository:
-          repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
-          state: present
-          filename: 'kubernetes'
+      apt_repository:
+        repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+        state: present
+        filename: 'kubernetes'
 
     - name: Install containerd.io (package that manages container lifecycle)
       shell: apt install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
