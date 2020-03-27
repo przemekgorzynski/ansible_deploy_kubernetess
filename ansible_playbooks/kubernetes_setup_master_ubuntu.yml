@@ -34,8 +34,6 @@
        name: "{{ ubuntu_packages }}"
        state: latest
        update_cache: yes
-       status: restarted
-       enabled: yes
 
     - name: Install system updates
       apt:
