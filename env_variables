@@ -1,4 +1,6 @@
 hosts_file: "127.0.0.1 localhost\n192.168.10.21 k8s-master master\n192.168.10.22 k8s-worker01 worker01\n"
+network_cid: "10.244.10.0/16"
+api-advertise-address: "192.168.10.21"
 
 ubuntu_packages:
 - apt-transport-https

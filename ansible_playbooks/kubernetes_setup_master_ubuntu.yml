@@ -72,3 +72,19 @@
 
     - debug:
        msg:  "{{ docker_status.stdout }}"
+
+    - name: Kubernetes cluster Initialization
+      shell: kubeadm init --pod-network-cidr="{{ network_cid }}"  --apiserver-advertise-address="{{ api-advertise-address }}"
+      register: initialization_output
+
+    - name: Storing Logs and Generated token for future purpose.
+      local_action: copy content={{ output.stdout }} dest=/home/centos/{{ token_file }}
+
+    - name: Copying required files
+      shell: |
+        mkdir -p $HOME/.kube
+        sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
+        sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+    - name: Deploy flanner network
+      shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
