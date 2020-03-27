@@ -4,8 +4,14 @@
   - name: Disable Swap on all nodes
     shell: swapoff -a
 
+  - name: check if fstab installed
+    stat:
+      path: /etc/fstab
+    register: fstab_exists
+
   - name: Comment Swap entries in /etc/fstab
     replace:
      path: /etc/fstab
      regexp: '(.*swap*)'
      replace: '#\1'
+    when: fstab_exists.stat.exists == True

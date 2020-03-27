@@ -1,7 +1,7 @@
 ---
 - hosts: master
   vars_files:
-    - env_variables
+    - ../env_variables
 
   tasks:
     - name: Add Docker apt-key to repository
