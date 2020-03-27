@@ -1,0 +1,43 @@
+---
+- hosts: master
+  vars_files:
+    - env_variables
+
+  tasks:
+    - name: Add Docker apt-key to repository
+        apt_key:
+          url: https://download.docker.com/linux/ubuntu/gpg
+          state: present
+
+    - name: Add Kubernetes apt-key to repository on Ubuntu
+        apt_key:
+          url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+          state: present
+
+    - name: Add Docker repository
+        apt_repository:
+          repo: deb https://download.docker.com/linux/ubuntu bionic stable
+          state: present
+
+    - name: Add Kubernetes repository
+        apt_repository:
+          repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+          state: present
+          filename: 'kubernetes'
+
+    - name: Install containerd.io (package that manages container lifecycle)
+      shell: dnf install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
+
+    - name: Install required packages
+      apt:
+       name: "{{ ubuntu_packages }}"
+       state: latest
+       update_cache: yes
+       status: restarted
+       enabled: yes
+
+    - name: Install system updates
+      apt:
+        name: "*"
+        state: latest
+        update_cache: yes

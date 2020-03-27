@@ -1,1 +1,9 @@
 hosts_file: "127.0.0.1 localhost\n192.168.0.21 k8s-master master\n167.114.2.104 k8s-worker01 worker01\n"
+
+ubuntu_packages:
+- apt-transport-https
+- docker-ce
+- firewalld
+- kubeadm
+
+centos_packages:
