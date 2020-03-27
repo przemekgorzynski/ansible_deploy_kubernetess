@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: yes
+
+- import_playbook: ansible_playbooks/prerequisites.yml
+- import_playbook: ansible_playbooks/configure_env.yml
+- import_playbook: ansible_playbooks/kubernetes_setup_master_centos.yml
+  when: ansible_distribution == "Ubuntu"
+
+- import_playbook: ansible_playbooks/kubernetes_setup_master_ubuntu.yml
+  when: ansible_distribution == "CentOS"
