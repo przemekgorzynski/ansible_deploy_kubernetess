@@ -7,7 +7,7 @@
   tasks:
     - name: Update /etc/hosts file
       copy:
-        content: "{{ host_file }}"
+        content: "{{ hosts_file }}"
         dest: /etc/hosts
 
 - hosts: master
