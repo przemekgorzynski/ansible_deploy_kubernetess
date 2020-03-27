@@ -3,6 +3,7 @@ hosts_file: "127.0.0.1 localhost\n192.168.0.21 k8s-master master\n167.114.2.104 
 ubuntu_packages:
 - apt-transport-https
 - docker-ce
+- docker-ce-cli
 - firewalld
 - kubeadm
 
