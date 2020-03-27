@@ -18,6 +18,7 @@
       apt_repository:
         repo: deb https://download.docker.com/linux/ubuntu bionic stable
         state: present
+        filename: 'docker'
 
     - name: Add Kubernetes repository
       apt_repository:
@@ -25,8 +26,8 @@
         state: present
         filename: 'kubernetes'
 
-    - name: Install containerd.io (package that manages container lifecycle)
-      shell: apt install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
+#    - name: Install containerd.io (package that manages container lifecycle)
+#      shell: apt-get install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
 
     - name: Install required packages
       apt:
