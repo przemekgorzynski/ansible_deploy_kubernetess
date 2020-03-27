@@ -26,9 +26,6 @@
         state: present
         filename: 'kubernetes'
 
-#    - name: Install containerd.io (package that manages container lifecycle)
-#      shell: apt-get install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
-
     - name: Install required packages
       apt:
        name: "{{ ubuntu_packages }}"
@@ -52,3 +49,19 @@
         firewall-cmd --reload
         modprobe br_netfilter
         echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
+
+    - name: Restart master server
+      shell: reboot
+      async: 1
+      poll: 0
+
+    - name: Wait for server to restart
+      local_action:
+        module: wait_for
+          host=k8s-master
+          port=22
+          delay=1
+          timeout=700
+
+    - name: Check connectivity
+      ping:
