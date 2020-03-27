@@ -74,8 +74,8 @@
        msg:  "{{ docker_status.stdout }}"
 
     - name: Kubernetes cluster Initialization
-      shell: kubeadm init --pod-network-cidr= "{{ network_cid }}"  --apiserver-advertise-address= "{{ api_advertise_address }}"
-      register: initialization_output
+      shell:
+       cmd: kubeadm init --pod-network-cidr={{network_cid}}  --apiserver-advertise-address {{api_advertise_address}}
 
     - name: Generate token for workers joining
       shell: kubeadm token generate
