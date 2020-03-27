@@ -1,6 +1,10 @@
 ---
 - hosts: all
   tasks:
+
+  - name: Check connectivity
+    ping:
+        -
   - name: Disable Swap on all nodes
     shell: swapoff -a
 
