@@ -8,23 +8,31 @@
       apt_key:
           url: https://download.docker.com/linux/ubuntu/gpg
           state: present
+      tags:
+        - repository
 
     - name: Add Kubernetes apt-key to repository on Ubuntu
       apt_key:
         url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
         state: present
+      tags:
+        - repository
 
     - name: Add Docker repository
       apt_repository:
         repo: deb https://download.docker.com/linux/ubuntu bionic stable
         state: present
         filename: 'docker'
+      tags:
+        - repository
 
     - name: Add Kubernetes repository
       apt_repository:
         repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
         state: present
         filename: 'kubernetes'
+      tags:
+        - repository
 
     - name: Install required packages
       apt:
@@ -51,16 +59,8 @@
         echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
 
     - name: Restart master server
-      shell: reboot
-      async: 1
-      poll: 0
-
-    - name: Wait for server to restart
       reboot:
         reboot_timeout: 3600
-
-    - name: Waiting 60 sec for system boot-up
-      shell: sleep 60
 
     - name: Check connectivity
       ping:
@@ -75,16 +75,24 @@
     - name: Kubernetes cluster Initialization
       shell:
        cmd: kubeadm init --pod-network-cidr={{network_cid}}  --apiserver-advertise-address {{api_advertise_address}}
+      tags:
+        - kube_init
 
     - name: Generate token for workers joining
       shell: kubeadm token generate
       register: joining_token
+      tags:
+        - kube_init
 
     - name: Copying required files
       shell: |
         mkdir -p $HOME/.kube
         sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
         sudo chown $(id -u):$(id -g) $HOME/.kube/config
+      tags:
+        - kube_init
 
     - name: Deploy flanner network
       shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+      tags:
+        - kube_init
