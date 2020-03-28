@@ -1,21 +1,16 @@
 ---
 - hosts: all
   gather_facts: yes
-  vars_files:
-    - ../env_variables
 
   tasks:
-    - name: Update /etc/hosts file
-      copy:
-        content: "{{ hosts_file }}"
-        dest: /etc/hosts
+    - name: Add Ansible inventory mappings to /etc/hosts
+      blockinfile:
+        path: /etc/hosts
+        block: |
+          {% for host in groups['all'] %}
+          {{ hostvars[host].ansible_host }} {{ host }}
+          {% endfor %}
 
-- hosts: master
-  tasks:
-    - name: Update master hostname
-      shell: echo "master" > /etc/hostname
-
-- hosts: workers
-  tasks:
-    - name: Update worker01 hostname
-      shell: echo "worker01" > /etc/hostname
+    - name: Set hostnames
+      hostname:
+        name: "{{ inventory_hostname }}"
