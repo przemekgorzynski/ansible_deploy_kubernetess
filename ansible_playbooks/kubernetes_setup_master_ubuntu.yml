@@ -63,6 +63,9 @@
           delay=1
           timeout=700
 
+    - name: Waiting 60 sec for system boot-up
+      shell: sleep 60
+
     - name: Check connectivity
       ping:
 
