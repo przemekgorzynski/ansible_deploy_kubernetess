@@ -56,12 +56,8 @@
       poll: 0
 
     - name: Wait for server to restart
-      local_action:
-        module: wait_for
-          host=k8s-master
-          port=22
-          delay=1
-          timeout=700
+      reboot:
+        reboot_timeout: 3600
 
     - name: Waiting 60 sec for system boot-up
       shell: sleep 60
