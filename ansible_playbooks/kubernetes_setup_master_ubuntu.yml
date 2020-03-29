@@ -106,4 +106,4 @@
 
     - name: Display kubernetes cluster overview
       debug:
-        msg: " {{ kube_status }}"
+        msg: " {{ kube_status.stdout_lines }}"
