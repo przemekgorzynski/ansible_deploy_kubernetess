@@ -101,6 +101,8 @@
       tags:
         - kube_init
 
+- import_playbook: ansible_playbooks/worker_nodes_join.yml
+
     - name: Chcecking kubernetes cluster info
       shell: kubectl get nodes -o wide
       register: kube_status
