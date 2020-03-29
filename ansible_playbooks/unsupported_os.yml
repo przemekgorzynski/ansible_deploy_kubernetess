@@ -1,4 +1,6 @@
 ---
-- tasks:
+- hosts: all
+  gather_facts: yes
+  tasks:
     - name: INFORMATION
       shell: echo "Unupported OS version while configuring master server. Please use CentOS or Ubuntu as master"
