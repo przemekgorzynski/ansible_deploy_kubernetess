@@ -34,7 +34,7 @@
 
     - name: Retreiving joining token
       shell: cat "{{ kube_init_log }}" | tail -n 2
-      store: kube_join_token
+      register: kube_join_token
 
     - name: Join node to cluster
       shell: "{{ kube_join_token }}"
