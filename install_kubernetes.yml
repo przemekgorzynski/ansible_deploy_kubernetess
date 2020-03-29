@@ -14,8 +14,8 @@
 - hosts: master
 - import_playbook: ansible_playbooks/kubernetes_setup_master_ubuntu.yml
   when: ansible_distribution == "Ubuntu"
-- import_playbook: ansible_playbooks/kubernetes_setup_master_centos.yml
-  when: ansible_distribution == "CentOS"
+#- import_playbook: ansible_playbooks/kubernetes_setup_master_centos.yml
+#  when: ansible_distribution == "CentOS"
 - import_playbook: ansible_playbooks/unsupported_os.yml
   when: (ansible_distribution != "Ubuntu") or (ansible_distribution != "CentOS")
 
