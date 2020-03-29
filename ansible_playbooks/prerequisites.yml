@@ -20,3 +20,15 @@
        regexp: '(.*swap*)'
        replace: '#\1'
       when: fstab_exists.stat.exists == True
+
+    - name: Add Ansible inventory mappings to /etc/hosts
+      blockinfile:
+        path: /etc/hosts
+        block: |
+          {% for host in groups['all'] %}
+          {{ hostvars[host].ansible_host }} {{ host }}
+          {% endfor %}
+
+    - name: Set hostnames
+      hostname:
+        name: "{{ inventory_hostname }}"

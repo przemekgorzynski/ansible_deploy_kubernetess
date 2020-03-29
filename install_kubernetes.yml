@@ -5,9 +5,13 @@
 
 
 - import_playbook: ansible_playbooks/prerequisites.yml
-- import_playbook: ansible_playbooks/configure_env.yml
+- import_playbook: ansible_playbooks/general_configuration_ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
+
 
 #MASTER CONFIGURATION
+
+- hosts: master
 - import_playbook: ansible_playbooks/kubernetes_setup_master_ubuntu.yml
   when: ansible_distribution == "Ubuntu"
 - import_playbook: ansible_playbooks/kubernetes_setup_master_centos.yml
@@ -16,8 +20,12 @@
   when: (ansible_distribution != "Ubuntu") or (ansible_distribution != "CentOS")
 
 #WORKERS CONFIGURATION
+
+- hosts: workres
 - import_playbook: ansible_playbooks/worker_ubuntu.yml
   when: ansible_distribution == "Ubuntu"
 
 #KUBERNETES CLUSTER CHECK
+
+- hosts: master
 - import_playbook: ansible_playbooks/kubernetes_cluster_final_check.yml
