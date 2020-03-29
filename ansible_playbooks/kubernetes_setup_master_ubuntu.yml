@@ -103,7 +103,11 @@
     - name: Chcecking kubernetes cluster info
       shell: kubectl get nodes -o wide
       register: kube_status
+      tags:
+        - kube_init
 
     - name: Display kubernetes cluster overview
       debug:
         msg: " {{ kube_status.stdout_lines }}"
+      tags:
+        - kube_init
