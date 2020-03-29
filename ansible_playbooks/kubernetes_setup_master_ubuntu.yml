@@ -83,7 +83,7 @@
     - name: Store Kubernetes initialization log in file /kube_init.log
       copy:
         content: "{{ kube_init_output }}"
-        dest: /kube_init.log
+        dest: "{{ kube_init_log }}"
       tags:
         - kube_init
 
