@@ -17,16 +17,6 @@
       tags:
         - kube_init
 
-    - name: Fetch kube init  file from master
-      run_once: yes
-      fetch:
-        src: "{{ kube_init_log }}"
-        dest: /tmp/"{{ kube_init_log }}"
-        flat: yes
-      tags:
-        - kube_init
-
-
     - name: Copy  Kubernetes configuration files
       shell: |
         mkdir -p $HOME/.kube
@@ -39,3 +29,9 @@
       shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
       tags:
         - kube_init
+
+    - name: Retreive joining token
+      shell: cat "{{ kube_init_log }}" | tail -n 2
+      register: kube_join_token
+      tags:
+        - worker_join
