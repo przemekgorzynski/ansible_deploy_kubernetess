@@ -21,7 +21,7 @@
 
 #WORKERS CONFIGURATION
 
-- hosts: workres
+- hosts: workers
 - import_playbook: ansible_playbooks/worker_ubuntu.yml
   when: ansible_distribution == "Ubuntu"
 

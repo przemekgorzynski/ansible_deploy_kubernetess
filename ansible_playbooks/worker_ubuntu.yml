@@ -1,7 +1,5 @@
 ---
 - hosts: workers
-  vars_files:
-    - ../env_variables
 
     - name: Retreiving joining token
       shell: cat "{{ kube_init_log }}" | tail -n 2

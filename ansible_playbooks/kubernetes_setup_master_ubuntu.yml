@@ -1,6 +1,5 @@
 ---
-- hosts: master
-  vars_files:
+- vars_files:
     - ../env_variables
 
   tasks:
@@ -8,8 +7,6 @@
     - name: Kubernetes cluster Initialization
       shell: kubeadm init \-\-pod-network-cidr="{{network_cid}}"  \-\-apiserver-advertise-address="{{api_advertise_address}}"
       register: kube_init_output
-      #shell:
-       #cmd: kubeadm init --pod-network-cidr={{network_cid}}  --apiserver-advertise-address {{api_advertise_address}}
       tags:
         - kube_init
 

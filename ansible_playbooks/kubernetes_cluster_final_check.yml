@@ -1,8 +1,5 @@
 ---
-- hosts: master
-  vars_files:
-    - ../env_variables
-  tasks:
+- tasks:
 
     - name: Chcecking kubernetes cluster info
       shell: kubectl get nodes -o wide

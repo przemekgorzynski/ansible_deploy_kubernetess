@@ -1,13 +1,13 @@
 ---
-- hosts: all
+- gather_facts: yes
   vars_files:
     - ../env_variables
 
   tasks:
     - name: Add Docker apt-key to repository
       apt_key:
-          url: https://download.docker.com/linux/ubuntu/gpg
-          state: present
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
       tags:
         - general_config_ubuntu
 
@@ -36,9 +36,9 @@
 
     - name: Install required packages
       apt:
-       name: "{{ ubuntu_packages }}"
-       state: latest
-       update_cache: yes
+        name: "{{ ubuntu_packages }}"
+        state: latest
+        update_cache: yes
       tags:
         - general_config_ubuntu
 
@@ -83,6 +83,6 @@
 
     - name: Docker status
       debug:
-       msg:  "{{ docker_status.stdout_lines }}"
+        msg:  "{{ docker_status.stdout_lines }}"
       tags:
         - general_config_ubuntu
