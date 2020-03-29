@@ -1,15 +1,23 @@
 ---
 - hosts: workers
   gather_facts: yes
+  vars_files:
+    - ../env_variables
 
   tasks:
-    - name: Retreiving joining token
+    - name: Retreive joining token
       shell: cat "{{ kube_init_log }}" | tail -n 2
       register: kube_join_token
       tags:
         - worker_join
 
-    - name: Join node to cluster
+    - name: Display joining token
+      debug:
+        msg: "{{ kube_join_token.stdout }}"
+      tags:
+        - worker_join
+
+    - name: Join worker nodes to cluster
       shell: "{{ kube_join_token }}"
       tags:
         - worker_join

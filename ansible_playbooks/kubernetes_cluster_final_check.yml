@@ -3,7 +3,7 @@
   gather_facts: yes
 
   tasks:
-    - name: Chcecking kubernetes cluster info
+    - name: Chceck kubernetes cluster info
       shell: kubectl get nodes -o wide
       register: kube_status
       tags:

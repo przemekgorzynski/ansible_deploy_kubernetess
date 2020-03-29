@@ -17,7 +17,7 @@
       tags:
         - kube_init
 
-    - name: Copying  Kubernetes configuration files
+    - name: Copy  Kubernetes configuration files
       shell: |
         mkdir -p $HOME/.kube
         sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
