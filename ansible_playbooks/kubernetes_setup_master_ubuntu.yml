@@ -73,18 +73,21 @@
        msg:  "{{ docker_status.stdout }}"
 
     - name: Kubernetes cluster Initialization
-      shell:
-       cmd: kubeadm init --pod-network-cidr={{network_cid}}  --apiserver-advertise-address {{api_advertise_address}}
+      shell: kubeadm init \-\-pod-network-cidr="{{network_cid}}"  \-\-apiserver-advertise-address="{{api_advertise_address}}"
+      register: kube_init_output
+      #shell:
+       #cmd: kubeadm init --pod-network-cidr={{network_cid}}  --apiserver-advertise-address {{api_advertise_address}}
       tags:
         - kube_init
 
-    - name: Generate token for workers joining
-      shell: kubeadm token generate
-      register: joining_token
+    - name: Store Kubernetes initialization log in file /kube_init.log
+      copy:
+        content: "{{ kube_init_output }}"
+        dest: /kube_init.log
       tags:
         - kube_init
 
-    - name: Copying required files
+    - name: Copying  Kubernetes configuration files
       shell: |
         mkdir -p $HOME/.kube
         sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -96,3 +99,11 @@
       shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
       tags:
         - kube_init
+
+    - name: Chcecking kubernetes cluster info
+      shell: kubectl get nodes -o wide
+      register: kube_status
+
+    - name: Display kubernetes cluster overview
+      debug:
+        msg: " {{ kube_status }}"
