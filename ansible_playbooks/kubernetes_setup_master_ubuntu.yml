@@ -70,7 +70,7 @@
       register: docker_status
 
     - debug:
-       msg:  "{{ docker_status.stdout }}"
+       msg:  "{{ docker_status.stdout_lines }}"
 
     - name: Kubernetes cluster Initialization
       shell: kubeadm init \-\-pod-network-cidr="{{network_cid}}"  \-\-apiserver-advertise-address="{{api_advertise_address}}"
@@ -82,7 +82,7 @@
 
     - name: Store Kubernetes initialization log in file /kube_init.log
       copy:
-        content: "{{ kube_init_output }}"
+        content: "{{ kube_init.stdout_lines }}"
         dest: "{{ kube_init_log }}"
       tags:
         - kube_init
