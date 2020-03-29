@@ -1,5 +1,6 @@
 ---
-- gather_facts: yes
+- hosts: all
+  gather_facts: yes
   vars_files:
     - ../env_variables
 

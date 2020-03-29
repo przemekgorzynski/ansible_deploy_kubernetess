@@ -1,5 +1,6 @@
 ---
-- tasks:
+- hosts: master
+  tasks:
 
     - name: Chcecking kubernetes cluster info
       shell: kubectl get nodes -o wide

@@ -1,5 +1,6 @@
 ---
-- vars_files:
+- hosts: master
+  vars_files:
     - ../env_variables
 
   tasks:
