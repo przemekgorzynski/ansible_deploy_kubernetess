@@ -11,7 +11,7 @@
       tags:
         - repository
 
-    - name: Add Kubernetes apt-key to repository on Ubuntu
+    - name: Add Kubernetes apt-key to repository
       apt_key:
         url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
         state: present
