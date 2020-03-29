@@ -1,5 +1,7 @@
 ---
 - hosts: workers
+  gather_facts: yes
+
   tasks:
     - name: Retreiving joining token
       shell: cat "{{ kube_init_log }}" | tail -n 2
