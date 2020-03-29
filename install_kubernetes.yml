@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: master
   gather_facts: yes
 
 - import_playbook: ansible_playbooks/prerequisites.yml
@@ -10,3 +10,13 @@
   when: ansible_distribution == "Ubuntu"
 - import_playbook: ansible_playbooks/unsupported_os.yml
   when: (ansible_distribution != "Ubuntu") or (ansible_distribution != "CentOS")
+
+- hosts: workers
+  gather_facts: yes
+
+- import_playbook: ansible_playbooks/prerequisites.yml
+- import_playbook: ansible_playbooks/configure_env.yml
+- import_playbook: ansible_playbooks/worker_ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
+- import_playbook: ansible_playbooks/worker_centos.yml
+  when: ansible_distribution == "CentOS"
