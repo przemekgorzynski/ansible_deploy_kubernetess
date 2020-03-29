@@ -86,7 +86,7 @@
         content: "{{ kube_init_output.stdout }}"
         dest: "{{ kube_init_log }}"
       tags:
-        - kube_init_
+        - kube_init
 
     - name: Copying  Kubernetes configuration files
       shell: |
