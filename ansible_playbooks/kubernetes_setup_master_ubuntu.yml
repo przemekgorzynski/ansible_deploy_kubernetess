@@ -35,3 +35,9 @@
       register: kube_join_token
       tags:
         - worker_join
+
+    - name: Export joining tokes as fact
+      set_fact:
+        joining_token_fact: "{{ kube_join_token.stdout}}"
+      tags:
+        - worker_join
