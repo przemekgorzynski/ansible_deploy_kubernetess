@@ -7,11 +7,11 @@
   tasks:
     - name: Display joining token
       debug:
-        msg: "{{ joining_token_fact.stdout_lines }}"
+        msg: "{{ joining_token_fact }}"
       tags:
         - worker_join
 
     - name: Join worker nodes to cluster
-      shell: "{{ joining_token_fact.stdout_lines }}"
+      shell: "{{ joining_token_fact }}"
       tags:
         - worker_join
