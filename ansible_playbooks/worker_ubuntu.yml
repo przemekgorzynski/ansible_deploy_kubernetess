@@ -7,11 +7,11 @@
   tasks:
     - name: Display joining token
       debug:
-        msg: "{{ kube_join_token.stdout }}"
+        msg: "{{ joining_token_fact.stdout_lines }}"
       tags:
         - worker_join
 
     - name: Join worker nodes to cluster
-      shell: "{{ kube_join_token }}"
+      shell: "{{ joining_token_fact.stdout_lines }}"
       tags:
         - worker_join
