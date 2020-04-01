@@ -16,7 +16,7 @@
         - worker_join
 
     - name: Retreive joining token
-      shell: cat /{{ kube_init_log }}/ | tail -n 2
+      shell: cat /{{ kube_init_log }} | tail -n 2
       register: kube_join_token
       tags:
         - worker_join
