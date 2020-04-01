@@ -5,6 +5,15 @@
     - ../env_variables
 
   tasks:
+
+    - name: Install system updates
+      apt:
+        name: "*"
+        state: latest
+        update_cache: yes
+      tags:
+        - general_config_ubuntu
+        -
     - name: Add Docker apt-key to repository
       apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
@@ -35,17 +44,9 @@
       tags:
         - general_config_ubuntu
 
-    - name: Install required packages
+    - name: Install Kubernetes required packages
       apt:
         name: "{{ ubuntu_packages }}"
-        state: latest
-        update_cache: yes
-      tags:
-        - general_config_ubuntu
-
-    - name: Install system updates
-      apt:
-        name: "*"
         state: latest
         update_cache: yes
       tags:
