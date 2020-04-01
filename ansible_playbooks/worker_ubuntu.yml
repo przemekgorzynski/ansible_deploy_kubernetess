@@ -20,7 +20,7 @@
       register: kube_join_token
       tags:
         - worker_join
-        -
+
     - name: Display joining token
       debug:
         msg: "{{ kube_join_token.stdout }}"
