@@ -30,14 +30,10 @@
       tags:
         - kube_init
 
-    - name: Retreive joining token
-      shell: cat "{{ kube_init_log }}" | tail -n 2
-      register: kube_join_token
+    - name: Fetch file with joining token
+      fetch:
+        src: "{{ kube_init_log }}"
+        dest: "{{ kube_init_log }}"
       tags:
         - worker_join
 
-    - name: Export joining tokes as fact
-      set_fact:
-        joining_token_fact: "{{ kube_join_token.stdout}}"
-      tags:
-        - worker_join

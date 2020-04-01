@@ -5,6 +5,13 @@
     - ../env_variables
 
   tasks:
+
+    - name: Retreive joining token
+      shell: cat "{{ kube_init_log }}" | tail -n 2
+      register: kube_join_token
+      tags:
+        - worker_join
+        -
     - name: Display joining token
       debug:
         msg: "{{ joining_token_fact }}"
