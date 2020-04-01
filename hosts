@@ -14,3 +14,4 @@ k8s-worker01
 [all:children]
 master
 workers
+ubuntu
