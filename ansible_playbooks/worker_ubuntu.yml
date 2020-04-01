@@ -23,11 +23,11 @@
         -
     - name: Display joining token
       debug:
-        msg: "{{ joining_token_fact }}"
+        msg: "{{ kube_join_token }}"
       tags:
         - worker_join
 
     - name: Join worker nodes to cluster
-      shell: "{{ joining_token_fact }}"
+      shell: "{{ kube_join_token }}"
       tags:
         - worker_join

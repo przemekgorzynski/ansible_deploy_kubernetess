@@ -7,6 +7,10 @@ k8s-master
 [workers]
 k8s-worker01
 
+[ubuntu]
+k8s-master
+k8s-worker01
+
 [all:children]
 master
 workers
