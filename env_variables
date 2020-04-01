@@ -1,6 +1,6 @@
 network_cid: "10.244.10.0/16"
 api_advertise_address: "192.168.10.21"
-kube_init_log: "/kube_init_log.txt"
+kube_init_log: "kube_init_log.txt"
 
 ubuntu_packages:
 - apt-transport-https

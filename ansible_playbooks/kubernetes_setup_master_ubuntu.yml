@@ -13,7 +13,7 @@
     - name: Store Kubernetes initialization log in file /kube_init.log
       copy:
         content: "{{ kube_init_output.stdout }}"
-        dest: "{{ kube_init_log }}"
+        dest: /{{ kube_init_log }}
       tags:
         - kube_init
 
@@ -32,8 +32,8 @@
 
     - name: Fetch file with joining token
       fetch:
-        src: "{{ kube_init_log }}"
-        dest: "{{ kube_init_log }}"\/
+        src: /{{ kube_init_log }}
+        dest: /{{ kube_init_log }}
       tags:
         - worker_join
 
