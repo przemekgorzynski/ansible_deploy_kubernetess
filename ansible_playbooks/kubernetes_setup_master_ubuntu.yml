@@ -33,6 +33,7 @@
     - name: Fetch file with joining token
       fetch:
         src: /{{ kube_init_log }}
-        dest: /{{ kube_init_log }}
+        dest: /
+        flat: true
       tags:
         - worker_join
