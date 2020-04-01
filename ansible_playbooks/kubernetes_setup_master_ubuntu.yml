@@ -10,7 +10,7 @@
       tags:
         - kube_init
 
-    - name: Store Kubernetes initialization log in file /kube_init.log
+    - name: Store Kubernetes initialization log in file /kube_init_log.txt
       copy:
         content: "{{ kube_init_output.stdout }}"
         dest: /{{ kube_init_log }}
@@ -36,4 +36,3 @@
         dest: /{{ kube_init_log }}
       tags:
         - worker_join
-
