@@ -6,8 +6,17 @@
 
   tasks:
 
+    - name: Transfer file with joining token to workers
+      copy:
+        src: /{{ kube_init_log }}
+        dest: /{{ kube_init_log }}
+        backup: yes
+        force: yes
+      tags:
+        - worker_join
+
     - name: Retreive joining token
-      shell: cat "{{ kube_init_log }}" | tail -n 2
+      shell: cat /{{ kube_init_log }}/ | tail -n 2
       register: kube_join_token
       tags:
         - worker_join
