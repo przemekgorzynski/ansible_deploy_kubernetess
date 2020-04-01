@@ -10,10 +10,11 @@
       apt:
         name: "*"
         state: latest
+        only_upgrade: yes
         update_cache: yes
       tags:
         - general_config_ubuntu
-        -
+
     - name: Add Docker apt-key to repository
       apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
