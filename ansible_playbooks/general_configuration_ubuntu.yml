@@ -47,7 +47,7 @@
 
     - name: Install Kubernetes required packages
       apt:
-        name: "{{ ubuntu_packages }}"
+        name: "{{ ubuntu_master_packages }}"
         state: latest
         update_cache: yes
       tags:
